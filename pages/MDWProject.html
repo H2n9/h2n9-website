@@ -297,6 +297,135 @@
                 <div>Complex Pathway Diagram</div>
             </span>
         </div>
+
+        <h3>Dataset Building</h3>
+
+        <p>
+            With all usable data extracted from the profile, it is compared with any existing data and compiled into an individual JSON file.
+            Storing each profile individually in an intermediate stage makes it significantly easier to perform corrections and allows me to easily track a ground truth profile source separate from any that might appear in the final database.
+        </p>
+
+        <div class="aside">
+            <span class="tagged_image">
+                <p>{
+    "StateID": 2151,
+    "Name": "Emma Gaine",
+    "ImageURL": "https://i.imgur.com/dNN4kwo.jpeg",
+    "Description": "P#:4155122618\n\nMayor\n\nClass 2 License Issued 4/28/22 - Judge Cross\nSerial# 2151-iON-833 | serial: 2151",
+    "Vehicles": [
+        "Camaro ZL1",
+        "Injection",
+        "Seashark",
+        "Kalahari",
+        "Blazer"
+    ],
+    "Housing": [
+        {
+            "Name": "No3",
+            "Type": "Apartment"
+        },
+        {
+            "Name": "Kimble Hill Drive 2",
+            "Type": "Keyholder"
+        },
+        {
+            "Name": "Mirror Park Blvd 7",
+            "Type": "Owner"
+        }
+    ],
+    "Employment": [
+        {
+            "Name": "Happy Yoga",
+            "Role": "Owner"
+        },
+        {
+            "Name": "Homestead Bakery",
+            "Role": "Owner"
+        },
+        {
+            "Name": "Little Paws Animal Hospital",
+            "Role": "Veterinary Surgeon"
+        }
+    ],
+    "Licenses": [
+        "Drivers License",
+        "Hunting License",
+        "Fishing License",
+        "Weapons License",
+        "Medical License",
+        "Business License",
+        "Oil Pump License",
+        "Class 2 Weapons License"
+    ],
+    "Tags": []
+}
+            </p>
+                <div>Example of an Extracted Profile</div>
+            </span>
+            <span class="tagged_image">
+                <p>-Sources.json-
+{
+    "Identity": "0",
+    "Identity_Complete": true,
+    "Vehicles": "1488461857",
+    "Vehicles_Complete": true,
+    "Housing": "1488461857",
+    "Housing_Complete": true,
+    "Hotels": "1488461857",
+    "Hotels_Complete": true,
+    "Employment": "1488461857",
+    "Employment_Complete": false,
+    "Licenses": "1488461857",
+    "Licenses_Complete": true,
+    "Tags": "1488461857",
+    "Tags_Complete": false
+}
+                </p>
+                <p>-Log.txt-
+-----2022-06-27_19:00:23-----
+> Operating on '0/frame349320.png' <
+State Id: 2151
+Updated entries:
+    'Identity'
+    'Vehicles'
+    'Housing'
+    'Hotels'
+    'Employment'
+
+-----2022-06-27_20:52:49-----
+> Operating on '1488461857/frame349260.png' <
+State Id: 2151
+Updated entries:
+    'Licenses'
+    'Tags'
+    'Vehicles'
+    'Housing'
+    'Hotels'
+    'Employment'
+
+-----2022-06-27_20:52:51-----
+> Operating on '1488461857/frame349320.png' <
+State Id: 2151
+Updated entries:
+    'Employment'
+
+-----2022-06-27_20:52:52-----
+> Operating on '1488461857/frame349380.png' <
+State Id: 2151
+Updated entries:
+    'Licenses'
+    'Employment'
+                </p>
+                <div>Associated Source and Log File</div>
+            </span>
+        </div>
+
+        <p>
+            Following this stage, a final script is used to compile all the profiles into a single dataset.
+            This script also does some additional processing like separating out both properties/businesses into their own databases and merging any priors found from incident reports that might be missing in the profile due to not being detected.
+            <br><br>
+            And with that, the entire database is complete and ready for use.
+        </p>
         
 
         <h2>Evaulating the Results</h2>
@@ -307,7 +436,8 @@
             Over a 2 month period of sporadic data collection. I accumulated just over 125,000 MDW specific frames from around 100 VODs.
             <br>
             <br>
-            After processing, 579 unique MDW profiles were extracted with over 2000 additional updates computed.
+            After processing, 579 unique MDW profiles were extracted with over 2000 additional updates computed. 
+            Additionally, around 850 complete incidents were extracted with a further 3000 incomplete incidents collected.
         </p>
 
         <h4>The Issues and Potential Improvements</h4>
@@ -325,7 +455,8 @@
                 However, this wouldn't be very effective for many of the details sections where the detected entries can be non-words.
                 So another step here could be to automatically match new detections with previously known entries.
                 In fact, I had already put this in place for the priors section specifically but did not have time to implement it for all sections alike.
-
+                <br><br>
+                Despite even these measures, a detection inaccuracy on a State ID would still be a critical failure requiring manual intervention.
             </dd>
             <br>
             <li>Profile Tags Section</li>

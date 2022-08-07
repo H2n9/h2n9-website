@@ -52,6 +52,20 @@ a:hover {
     background-color: #333333;
 }
 
+.tagged_image p {
+    width: 100%;
+
+    line-height: 14px;
+    letter-spacing: 1px;
+
+    font-size: 0.75em;
+    
+    white-space: pre-wrap;
+    
+    display: block;
+    user-select: none;
+}
+
 .aside {
     display: flex;
     flex-direction: row;
