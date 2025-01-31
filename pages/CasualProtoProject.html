@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Ronnie Moir - Casual Multiplayer Game</title>
+
+        <link rel="stylesheet" href="../styles/blog.css">
+    </head>
+
+    <body>
+        <h1>Ronnie Moir - Casual Multiplayer Game</h1>
+        <a href="../index.html">Home</a>
+
+        <br><br>
+
+        <h3>Overview</h3>
+        <p>
+        A casual multiplayer game inspired by classic game <a href="https://en.wikipedia.org/wiki/Trash_Panic">Trash Panic</a>.
+        </p>
+        <p>
+        The main goal was to quickly prototype an online/local co-op framework and build a casual style game on top. While the development of the framework was successful, the implementation of the gameplay was limited due a few issues discovered along the way. 
+        </p>
+        <p>
+        Unity physics (Physx) is unsuited to this style of game without major modifications due to the unstable behaviour of stacks of objects. Unity does provide an alternative physics system through Havok but that is limited to ECS workflows which was out of scope for this project. Some small mitigations could be made to provide some benefit to stack stability through a more eager sleeping behaviour but I did not explore this too thoroughly as the project was only intended as a quick prototype and the main goal of building out the framework had been achieved.
+        </p>
+
+        <h3>Screenshots</h3>
+        <img width="100%" src="../images/Unity/trash-multi.png">
+
+        <img width="100%" src="../images/Unity/trash-gameplay.png">
+
+        <img width="100%" src="../images/Unity/trash-menu.png">
+
+        <img width="100%" src="../images/Unity/trash-lobby.png">
+        
+        <br><br>
+        <a href="#">Back to top</a>
+        <br><br>
+    </body>
+</html>
