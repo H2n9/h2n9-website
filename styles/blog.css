@@ -21,7 +21,7 @@ body {
 
 p {
     text-align: justify;
-    
+
     width: 100%;
     min-width: 50%;
 }
@@ -59,9 +59,9 @@ a:hover {
     letter-spacing: 1px;
 
     font-size: 0.75em;
-    
+
     white-space: pre-wrap;
-    
+
     display: block;
     user-select: none;
 }
@@ -76,4 +76,10 @@ a:hover {
 
     margin-right: 0.5vmin;
     margin-left: 0.5vmin;
+}
+
+iframe {
+    aspect-ratio: 16/9;
+    width: 100%;
+    height: 100%;
 }
