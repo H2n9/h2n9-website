@@ -1,0 +1,98 @@
+<html>
+
+<head>
+    <title>Ronnie Moir - Minecraft Turtle Automated Mining</title>
+
+    <link rel="stylesheet" href="../styles/blog.css">
+</head>
+
+<body>
+    <h1>Ronnie Moir - Minecraft Turtle Automated Mining</h1>
+    <a href="../index.html">Home</a>
+
+    <br><br>
+
+    <h3>Overview</h3>
+    <div class="aside">
+        <span>
+            <p>
+                As a fun project, I wanted to explore the idea of creating an automatic mining system in Modded Minecraft. With the ComputerCraft mod you can
+                use Lua scripting to control a small robot called a Turtle. The turtle can perform various actions like moving around, mining blocks,
+                transfering items and scanning its environment. Therefore by coordinating a large swarm of these turtles, it is possible to mine areas of the
+                world automatically at a large scale.
+                <br><br>
+                To accomplish this, I first created a Flask webserver to act as the central controller for each turtle. I exposed some basic get and post
+                commands to allow the turtles to fetch their tasks and deliver the results back. On top of this server I created a 3D frontend using Three.js to
+                display the controller's current understanding of the world and the statuses of each turtle in its control. Lastly I created the turtle's lua
+                script which polls the server for tasks and performs them, reporting back its results.
+                <br><br>
+                The script for the turtle had some additional requirements like:
+                <ls>
+                    <li>Tracking its fuel and refueling when needed.</li>
+                    <li>Tracking a ground-truth position as it performs movement actions in the world.</li>
+                    <li>Tracking inventory space and sending off items to central storage as needed.</li>
+                    <li>Cycling out equipment for which can only be used one at a time. For example, the GeoScanner which scans the environment, the modem which
+                        allows performing GPS requests
+                        to locate the exact location of the turtle in the world, and ender chests which allow sending and receiving items remotely.</li>
+                </ls>
+                <br>
+                These additional actions pause the current task and report the status back to the server to give the frontend useful feedback.
+                <br><br>
+                Below are the screenshots of the frontend website with some additional contextual information alongside:
+            </p>
+        </span>
+
+        <span class="tagged_image">
+            <img src="../images/Minecraft/mc-6.png">
+            <div>A Turtle from the ComputerCraft Minecraft Mod</div>
+        </span>
+    </div>
+
+    <h3>Screenshots</h3>
+    <span class="tagged_image">
+        <img src="../images/Minecraft/mc-1.png">
+        <div>With turtles we can use a GeoScanner to collect the scan of the environment around it. This scan is submitted to the webserver and displayed on the
+            frontend. From this scan the webserver can collect all the ore veins and begin dispatching tasks to available turtles. Upon completion of any task
+            the turtle will send an update of all it's actions since its last update. This includes its new position and any changes it has made to the world,
+            like destroying blocks.</div>
+    </span>
+    <br><br>
+
+    <span class="tagged_image">
+        <img src="../images/Minecraft/mc-2.png">
+        <div>The frontend displays the current task and status of each turtle. For the mining tasks you can also see the target ore veins are marked.
+            Turtle's have a limited inventory. When full, they will pause
+            their current task and start sending back the items remotely to storage. They
+            automatically report this status to the webserver.</div>
+    </span>
+    <br><br>
+
+    <span class="tagged_image">
+        <img src="../images/Minecraft/mc-3.png">
+        <div>When all ore veins have been exhausted from the scanned area. A task is dispatched to one of the turtles to begin scanning the next area. Other
+            turtles during this time will idle until this is complete.</div>
+    </span>
+    <br><br>
+
+    <span class="tagged_image">
+        <img src="../images/Minecraft/mc-4.png">
+        <div>The turtles will continue to dig down until reaching bedrock where they will move to the next chunk and repeat the entire process from top to
+            bottom.</div>
+    </span>
+    <br><br>
+
+    <span class="tagged_image">
+        <img src="../images/Minecraft/mc-5.png">
+        <div>A significant area for improvement to be explored is with how ore veins are selected for each turtle. In this implementation they are
+            simply fetched in order of the x-axis, with each turtle taking the first in the queue. This leads to pretty inefficient pathing; turtles will move
+            back and forth across the chunk creating long movements between ore veins (Seen above). A better method would be to weigh ore veins by their
+            distance to the requesting turtle.</div>
+    </span>
+    <br><br>
+
+    <br><br>
+    <a href="#">Back to top</a>
+    <br><br>
+</body>
+
+</html>
