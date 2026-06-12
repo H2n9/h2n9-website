@@ -18,12 +18,14 @@
     </p>
 
     <h3>Current Status</h3>
-    <img width="100%" src="../images/Dx9/dx-3.gif">
+    <img width="100%" src="../images/Dx9/dx-4.png">
     <br><br>
 
     <h3>Process</h3>
 
+
     <p>
+        (09/06/2026)<br><br>
         I first started out by creating the basic injectable dll. The main goal was to ensure that the hooks were setup correctly. I am using <a
             href="https://github.com/tsudakageyu/minhook">minhook</a> to handle creating the trampoline functions between the real DirectX function calls and my
         overidden ones. I created a hook for the EndScene function and setup a basic Imgui to render.
@@ -33,6 +35,7 @@
 
 
     <p>
+        (9/06/2026)<br><br>
         Next I created a hook for the CreateTexture DX function. Here I can track the creation of new textures and store pointers to them. From these pointers,
         I setup the imgui to draw all the loaded textures. I also at this step tested a hook for the SetTexture function. We can intercept this function to
         replace the incoming texture pointer with our own one. By simply loading my own custom texture and substituting it for one of the in-game textures I can
@@ -43,6 +46,7 @@
     <br><br>
 
     <p>
+        (10/06/2026)<br><br>
         One of the next big challenges at this stage was handling communication between the hook library and the C# WPF application. For this I used Named
         Pipes. The WPF app acts as the host, with the hook acting as the client. The server sends commands to the client and the client sends back a response.
         <br><br>
@@ -64,8 +68,17 @@
     <img width="100%" src="../images/Dx9/dx-3.gif">
     <br><br>
 
-    <a href="#">Back to top</a>
-    <br><br>
+    <p>
+        (12/06/2026)<br><br>
+        Before fully tackling the texture replacement flow, I took the opportunity to tidy up the UI, expose useful information, and gave a way for the user to
+        write friendly names for textures making it easier to search for them later. These aren't currently saved between runs yet, but I am planning to
+        add a button to create/load a project folder which is where we can store information like this between sessions.
+    <p>
+        <img width="100%" src="../images/Dx9/dx-4.png">
+        <br><br>
+
+        <a href="#">Back to top</a>
+        <br><br>
 </body>
 
 </html>
