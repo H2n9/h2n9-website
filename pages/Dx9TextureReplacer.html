@@ -18,7 +18,7 @@
     </p>
 
     <h3>Current Status</h3>
-    <img width="100%" src="../images/Dx9/dx-4.png">
+    <img width="100%" src="../images/Dx9/dx-5.gif">
     <br><br>
 
     <h3>Process</h3>
@@ -73,12 +73,39 @@
         Before fully tackling the texture replacement flow, I took the opportunity to tidy up the UI, expose useful information, and gave a way for the user to
         write friendly names for textures making it easier to search for them later. These aren't currently saved between runs yet, but I am planning to
         add a button to create/load a project folder which is where we can store information like this between sessions.
+    </p>
+
+    <img width="100%" src="../images/Dx9/dx-4.png">
+    <br><br>
+
     <p>
-        <img width="100%" src="../images/Dx9/dx-4.png">
+        (12/06/2026)<br><br>
+        For texture replacement, I added two new commands:
+        <ls>
+            <li>SetTextureReplacement - Sets a replacement for a texture using a file path</li>
+            <li>ClearTextureReplacement - Reverts a replacement of a texture</li>
+        </ls>
+        <br>
+        Upon receiving the SetTextureReplacement command, the hook library will read the texture hash and associate the replacement file path with it. In the DX
+        SetTexture hook function we then check if the texture has a replacement associated. If it is not loaded at this stage we load it into memory and
+        intercept the original SetTexture call with our replacement texture.
         <br><br>
 
-        <a href="#">Back to top</a>
-        <br><br>
+        With this I have managed to prove out the core idea of the project. However I still have some challenges I want to tackle next:
+        <ls>
+            <li>Introduce a project folder to persist data between runs</li>
+            <li>Explore new ways to hook into texture creation to have more versatile data collection</li>
+            <li>Allow the hook library to automatically setup its data from the project folder, loading texture replacements automatically</li>
+            <li>Explore creating an image classification model to automatically give friendly names to textures</li>
+            <li>Some general UI improvements</li>
+        </ls>
+    </p>
+
+    <img width="100%" src="../images/Dx9/dx-5.gif">
+    <br><br>
+
+    <a href="#">Back to top</a>
+    <br><br>
 </body>
 
 </html>
